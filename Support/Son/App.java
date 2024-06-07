@@ -10,18 +10,14 @@ public class App {
 
         // Convertir les données audio en tableau de Complexe
         float[] donneesAudio = son.donnees();
-        int n = 512;
+        int n = 1024;
 
         // Assurez-vous que la longueur du signal est une puissance de deux pour la FFT
-        int tailleFFT = 512;
+        int tailleFFT = n;
 
         Complexe[] signal = new Complexe[tailleFFT];
         for (int i = 0; i < n; i++) {
             signal[i] = new ComplexeCartesien(donneesAudio[i], 0);
-        }
-        // Remplir le reste avec des zéros si nécessaire
-        for (int i = n; i < tailleFFT; i++) {
-            signal[i] = new ComplexeCartesien(0, 0);
         }
 
         // Appliquer la FFT sur le signal
@@ -32,6 +28,15 @@ public class App {
         for (int i = 0; i < resultat.length; i++) {
             System.out.print(i + " : (" + (float) resultat[i].reel() + " ; " + (float) resultat[i].imag() + "i)");
             System.out.println(", (" + (float) resultat[i].mod() + " ; " + (float) resultat[i].arg() + " rad)");
+        }
+        float tab[] = new float[tailleFFT];
+        float Final[][]= new float[tailleFFT][1];
+        for (int i = 0; i < resultat.length; i++) {
+            tab[i] = (float) resultat[i].mod();
+            Final[i][0]= tab[i];
+        }
+        for(int i = 0; i< Final.length;i++) {
+            System.out.println(Final[i][0]);
         }
     }
 }

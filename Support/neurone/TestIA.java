@@ -30,6 +30,7 @@ public class TestIA {
                 System.out.println("Error putain de ta mère");
                 cptError++;
             }
+
         }
     }
         float pourcentage = (((float) ((nbTry) * 4 - cptError) /(nbTry*4))*100);

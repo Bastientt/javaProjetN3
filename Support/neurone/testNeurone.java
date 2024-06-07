@@ -2,12 +2,17 @@ public class testNeurone
 {
 	public static void main(String[] args)
 	{
-		// Tableau des entrées de la fonction ET (0 = faux, 1 = vrai)
+
 		final float[][] entrees = {{0, 0}, {0, 1}, {1, 0}, {1, 1}};
-		
+
 		// Tableau des sorties de la fonction ET
-		final float[] resultats = {0, 0, 0, 1};
-		
+		final float[] resultatsAND = {0, 0, 0, 1};
+
+		final float[] resultatsOr = {0,1,1,1};
+
+		final float[] resultatsXOR = {0,1,1,0};
+
+
 		// On crée un neurone taillé pour apprendre la fonction ET
 		final iNeurone n = new NeuroneHeaviside(entrees[0].length);
 		//final iNeurone n = new NeuroneSigmoide(entrees[0].length);
@@ -15,7 +20,8 @@ public class testNeurone
 		
 		System.out.println("Apprentissage…");
 		// On lance l'apprentissage de la fonction ET sur ce neurone
-		System.out.println("Nombre de tours : "+n.apprentissage(entrees, resultats));
+		System.out.println("Nombre de tours : "+n.apprentissage(entrees, resultatsXOR));
+
 		
 		// On affiche les valeurs des synapses et du biais
 

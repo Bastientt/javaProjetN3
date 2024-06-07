@@ -1,7 +1,7 @@
 
 public class App {
     public static void main(String[] args){
-        String fichier = "C:\\Users\\leler\\Desktop\\projet IA\\javaProjetN3\\Sources sonores\\Sinusoide.wav";
+        String fichier = "../../Sources_sonores/Sinusoide.wav";
         Son test = new Son(fichier);
         Complexe[] signal = new Complexe[test.donnees().length];
         for (int i = 0; i < test.donnees().length; ++i)

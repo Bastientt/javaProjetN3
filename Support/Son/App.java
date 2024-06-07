@@ -1,4 +1,24 @@
 public class App {
+    public static float findMax(float[] array) {
+        float max = array[0];
+        for (int i = 1; i < array.length; i++) {
+            if (array[i] > max) {
+                max = array[i];
+            }
+        }
+        return max;
+    }
+    public static float[] divideArray(float[] array, float divisor) {
+        if (divisor == 0) {
+            throw new IllegalArgumentException("Divisor cannot be zero");
+        }
+
+        float[] result = new float[array.length];
+        for (int i = 0; i < array.length; i++) {
+            result[i] = array[i] / divisor;
+        }
+        return result;
+    }
     public static float[][] TabFFT() {
 
         String nomFichier = "Sources_sonores/Sinusoide.wav";
@@ -19,15 +39,30 @@ public class App {
         }
 
         // Convertir les données audio en tableau de Complexe
-        float[] donneesAudio = son.donnees();
-        float[] donneesAudio2 = son2.donnees();
-        float[] donneesAudio3 = son3.donnees();
-        float[] donneesAudio4= son4.donnees();
-        float[] donneesAudio5 = son5.donnees();
-        float[] donneesAudio6 = son6.donnees();
         int n = 1024;
+        float[] donneesAudio = son.bloc_deTaille(1,n);
+        float[] donneesAudio2 = son2.bloc_deTaille(1,n);
+        float[] donneesAudio3 = son3.bloc_deTaille(1,n);
+        float[] donneesAudio4= son4.bloc_deTaille(1,n);
+        float[] donneesAudio5 = son5.bloc_deTaille(1,n);
+        float[] donneesAudio6 = son6.bloc_deTaille(1,n);
 
-        // Assurez-vous que la longueur du signal est une puissance de deux pour la FFT
+        float max= findMax(donneesAudio);
+        float max2= findMax(donneesAudio2);
+        float max3= findMax(donneesAudio3);
+        float max4= findMax(donneesAudio4);
+        float max5= findMax(donneesAudio5);
+        float max6= findMax(donneesAudio6);
+
+        float[] donneesAudioNorme = divideArray(donneesAudio,max);
+        float[] donneesAudio2Norme = divideArray(donneesAudio2,max2);
+        float[] donneesAudio3Norme = divideArray(donneesAudio3,max3);
+        float[] donneesAudio4Norme = divideArray(donneesAudio4,max4);
+        float[] donneesAudio5Norme = divideArray(donneesAudio5,max5);
+        float[] donneesAudio6Norme = divideArray(donneesAudio6,max6);
+
+
+
         int tailleFFT = n;
 
         Complexe[] signal = new Complexe[tailleFFT];
@@ -37,12 +72,12 @@ public class App {
         Complexe[] signal5 = new Complexe[tailleFFT];
         Complexe[] signal6 = new Complexe[tailleFFT];
         for (int i = 0; i < n; i++) {
-            signal[i] = new ComplexeCartesien(donneesAudio[i], 0);
-            signal2[i] = new ComplexeCartesien(donneesAudio2[i], 0);
-            signal3[i] = new ComplexeCartesien(donneesAudio3[i], 0);
-            signal4[i] = new ComplexeCartesien(donneesAudio4[i], 0);
-            signal5[i] = new ComplexeCartesien(donneesAudio5[i], 0);
-            signal6[i] = new ComplexeCartesien(donneesAudio6[i], 0);
+            signal[i] = new ComplexeCartesien(donneesAudioNorme[i], 0);
+            signal2[i] = new ComplexeCartesien(donneesAudio2Norme[i], 0);
+            signal3[i] = new ComplexeCartesien(donneesAudio3Norme[i], 0);
+            signal4[i] = new ComplexeCartesien(donneesAudio4Norme[i], 0);
+            signal5[i] = new ComplexeCartesien(donneesAudio5Norme[i], 0);
+            signal6[i] = new ComplexeCartesien(donneesAudio6Norme[i], 0);
 
         }
 

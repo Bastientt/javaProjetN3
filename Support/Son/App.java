@@ -12,4 +12,5 @@ public class App {
             System.out.println(", ("+(float)resultat[i].mod()+" ; "+(float)resultat[i].arg()+" rad)");
         }
     }
+
 }

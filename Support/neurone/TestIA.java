@@ -13,7 +13,6 @@ public class TestIA {
         iNeurone neuroneHeaviside = new NeuroneHeaviside(entrees[0].length);
         iNeurone neuroneSigmoide = new NeuroneSigmoide(entrees[0].length);
 
-
         Scanner scanner = new Scanner(System.in);
         int choice = -1;
 

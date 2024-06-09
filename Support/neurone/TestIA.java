@@ -12,22 +12,24 @@ public class TestIA {
 
         iNeurone neuroneHeaviside = new NeuroneHeaviside(entrees[0].length);
         iNeurone neuroneSigmoide = new NeuroneSigmoide(entrees[0].length);
+        iNeurone neuroneRelu = new NeuroneRelu(entrees[0].length);
 
         Scanner scanner = new Scanner(System.in);
         int choice = -1;
 
         while (choice != 0) {
             System.out.println("=== Menu Principal ===");
-            System.out.println("1. Tester Heaviside Porte OR");
-            System.out.println("2. Tester Sigmoïde Porte OR");
+            System.out.println("1. Tester Heaviside Porte AND");
+            System.out.println("2. Tester Sigmoïde Porte AND");
             System.out.println("3. Tester FFT Sur Sinusoidale");
+            System.out.println("4. Tester Relu Porte AND");
             System.out.println("0. Quitter");
             System.out.print("Entrez votre choix: ");
             choice = scanner.nextInt();
             switch (choice) {
                 case 1:
-                    Apprentissage(neuroneHeaviside, resultatsOr, entrees);
-                    TestNeurone(neuroneHeaviside, resultatsOr, entrees);
+                    Apprentissage(neuroneHeaviside, resultatsAND, entrees);
+                    TestNeurone(neuroneHeaviside, resultatsAND, entrees);
                     break;
                 case 2:
                     Apprentissage(neuroneSigmoide, resultatsOr, entrees);
@@ -51,6 +53,9 @@ public class TestIA {
                         }
                     }
                     System.out.println("pourcentage de réussite : " + (float) ((6 - cptError) / 6) * 100 + "%");
+                case 4:
+                    Apprentissage(neuroneRelu, resultatsAND, entrees);
+                    TestNeurone(neuroneRelu, resultatsAND, entrees);
             }
         }
     }
@@ -64,7 +69,7 @@ public class TestIA {
     public static void TestNeurone(final iNeurone neuroneEntrainé, final float[] resultat, float[][] entreeBruitée) {
         int nbTry = 0;
         int cptError = 0;
-        for (float bruit = -0.1f; bruit <= 0.1f; bruit += 0.01f) {
+        for (float bruit = -0.08f; bruit <= 0.08f; bruit += 0.01f) {
 
             for (int i = 0; i < entreeBruitée.length; i++) {
                 for (int j = 0; j < entreeBruitée[i].length; j++) {

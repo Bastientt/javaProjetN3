@@ -65,7 +65,6 @@ public class TestIA {
         return neurone;
     }
 
-
     public static void TestNeurone(final iNeurone neuroneEntrainé, final float[] resultat, float[][] entreeBruitée) {
         int nbTry = 0;
         int cptError = 0;

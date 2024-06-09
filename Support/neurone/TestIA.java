@@ -63,7 +63,7 @@ public class TestIA {
                     break;
                 case 5 :
                     Apprentissage(neuroneSigmoide, resultFFTSig, entreeFFT);
-                    System.out.print("Entrée : Sinustest     |         ");
+                    System.out.print("Entrée : Sinus         |         ");
                     TestFFTNeurone(neuroneSigmoide,entreeFFTtest);
             }
         }

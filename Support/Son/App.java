@@ -39,13 +39,13 @@ public class App {
         }
 
         // Convertir les données audio en tableau de Complexe
-        int n = 1024;
-        float[] donneesAudio = son.bloc_deTaille(1,n);
-        float[] donneesAudio2 = son2.bloc_deTaille(1,n);
-        float[] donneesAudio3 = son3.bloc_deTaille(1,n);
-        float[] donneesAudio4= son4.bloc_deTaille(1,n);
-        float[] donneesAudio5 = son5.bloc_deTaille(1,n);
-        float[] donneesAudio6 = son6.bloc_deTaille(1,n);
+        int tailleFFT = 1024;
+        float[] donneesAudio = son.bloc_deTaille(1,tailleFFT);
+        float[] donneesAudio2 = son2.bloc_deTaille(1,tailleFFT);
+        float[] donneesAudio3 = son3.bloc_deTaille(1,tailleFFT);
+        float[] donneesAudio4= son4.bloc_deTaille(1,tailleFFT);
+        float[] donneesAudio5 = son5.bloc_deTaille(1,tailleFFT);
+        float[] donneesAudio6 = son6.bloc_deTaille(1,tailleFFT);
 
         float max= findMax(donneesAudio);
         float max2= findMax(donneesAudio2);
@@ -62,16 +62,13 @@ public class App {
         float[] donneesAudio6Norme = divideArray(donneesAudio6,max6);
 
 
-
-        int tailleFFT = n;
-
         Complexe[] signal = new Complexe[tailleFFT];
         Complexe[] signal2 = new Complexe[tailleFFT];
         Complexe[] signal3 = new Complexe[tailleFFT];
         Complexe[] signal4 = new Complexe[tailleFFT];
         Complexe[] signal5 = new Complexe[tailleFFT];
         Complexe[] signal6 = new Complexe[tailleFFT];
-        for (int i = 0; i < n; i++) {
+        for (int i = 0; i < tailleFFT; i++) {
             signal[i] = new ComplexeCartesien(donneesAudioNorme[i], 0);
             signal2[i] = new ComplexeCartesien(donneesAudio2Norme[i], 0);
             signal3[i] = new ComplexeCartesien(donneesAudio3Norme[i], 0);
@@ -118,5 +115,27 @@ public class App {
         Final[4]=tab4;
         Final[5]=tab5;
 return Final;
+    }
+    public static float[] TabFFTTest() {
+        String nomFichier = "Sources_sonores/SinusoideTest.wav";
+        Son son = new Son(nomFichier);
+        if (son.donnees() == null) {
+            System.out.println("Impossible de lire le fichier audio.");
+        }
+        int n = 1024;
+        float[] donneesAudio = son.bloc_deTaille(1,n);
+        float max= findMax(donneesAudio);
+        float[] donneesAudioNorme = divideArray(donneesAudio,max);
+        Complexe[] signal = new Complexe[n];
+        for(int i = 0; i < n; i++) {
+            signal[i] = new ComplexeCartesien(donneesAudioNorme[i], 0);
+        }
+        Complexe[] resultat = FFTCplx.appliqueSur(signal);
+        float tab[] = new float[n];
+
+        for (int i = 0; i < resultat.length; i++) {
+            tab[i] = (float) resultat[i].mod();
+        }
+        return tab;
     }
 }

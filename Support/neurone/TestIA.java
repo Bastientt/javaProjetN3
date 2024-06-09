@@ -16,13 +16,15 @@ public class TestIA {
 
         Scanner scanner = new Scanner(System.in);
         int choice = -1;
-
+        float[][] entreeFFT = App.TabFFT();
+        float[] entreeFFTtest = App.TabFFTTest();
         while (choice != 0) {
             System.out.println("=== Menu Principal ===");
             System.out.println("1. Tester Heaviside Porte AND");
             System.out.println("2. Tester Sigmoïde Porte AND");
             System.out.println("3. Tester FFT Sur Sinusoidale");
             System.out.println("4. Tester Relu Porte AND");
+            System.out.println("5. Tester FFT Sur un nouveau son SinusoidalTest");
             System.out.println("0. Quitter");
             System.out.print("Entrez votre choix: ");
             choice = scanner.nextInt();
@@ -36,7 +38,7 @@ public class TestIA {
                     TestNeurone(neuroneSigmoide, resultatsOr, entrees);
                     break;
                 case 3:
-                    float[][] entreeFFT = App.TabFFT();
+                    System.out.println("oula oula case 3 case 3");
                     Apprentissage(neuroneSigmoide, resultFFTSig, entreeFFT);
                     int cptError = 0;
                     for (int i = 0; i < 6; ++i) {
@@ -53,9 +55,16 @@ public class TestIA {
                         }
                     }
                     System.out.println("pourcentage de réussite : " + (float) ((6 - cptError) / 6) * 100 + "%");
+                    System.out.println("oula oula case 3 case 3");
+                    break;
                 case 4:
                     Apprentissage(neuroneRelu, resultatsAND, entrees);
                     TestNeurone(neuroneRelu, resultatsAND, entrees);
+                    break;
+                case 5 :
+                    Apprentissage(neuroneSigmoide, resultFFTSig, entreeFFT);
+                    System.out.print("Entrée : Sinustest     |         ");
+                    TestFFTNeurone(neuroneSigmoide,entreeFFTtest);
             }
         }
     }
@@ -92,7 +101,6 @@ public class TestIA {
                     }
                 }
                 if (sortie != resultat[i]) {
-                    System.out.println("Error putain de ta mère");
                     cptError++;
                 }
             }

@@ -116,6 +116,7 @@ public class App {
         Final[5]=tab5;
 return Final;
     }
+
     public static float[] TabFFTTest() {
         String nomFichier = "Sources_sonores/SinusoideTest.wav";
         Son son = new Son(nomFichier);
